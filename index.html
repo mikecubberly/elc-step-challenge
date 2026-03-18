@@ -198,7 +198,12 @@ const now=new Date(), isApr=(now.getMonth()===3&&now.getFullYear()===2026);
 const defDay=isApr?now.getDate():1;
 
 let U={};
-let S={sc:'home',tab:'submit',me:null,day:defDay,sv:'',wv:0,se:'',le:'',msg:'',mt:'',loading:false,neterr:''};
+const SESSION_KEY='ss26_me';
+function saveSession(me){try{localStorage.setItem(SESSION_KEY,JSON.stringify(me));}catch(e){}}
+function loadSession(){try{const d=localStorage.getItem(SESSION_KEY);return d?JSON.parse(d):null;}catch(e){return null;}}
+function clearSession(){try{localStorage.removeItem(SESSION_KEY);}catch(e){}}
+const _saved=loadSession();
+let S={sc:_saved?'dashboard':'home',tab:'submit',me:_saved||null,day:defDay,sv:'',wv:0,se:'',le:'',msg:'',mt:'',loading:false,neterr:''};
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -523,7 +528,7 @@ window.doSignup=async()=>{
     const r=await apiCall({action:'signup',firstName:fn,lastName:ln});
     if(r.ok){
       U[full]={firstName:fn,lastName:ln,steps:{}};
-      S={...S,sc:'signup-success',me:{fn,ln,full},se:''};
+      S={...S,sc:'signup-success',me:{fn,ln,full},se:''};saveSession({fn,ln,full});
     } else if(r.error==='exists'){
       S={...S,sc:'signup',se:`${full} already has an account. Please log in instead.`};
     } else {
@@ -546,7 +551,7 @@ window.doLogin=async()=>{
     if(!U[full]){
       S={...S,sc:'login',le:`No account found for "${full}". Please check the spelling of your name, or sign up if you have not yet created an account.`};
     } else {
-      S={...S,sc:'dashboard',tab:'submit',me:{fn,ln,full},day:defDay,sv:'',wv:0,msg:'',mt:'',le:''};
+      S={...S,sc:'dashboard',tab:'submit',me:{fn,ln,full},day:defDay,sv:'',wv:0,msg:'',mt:'',le:''};saveSession({fn,ln,full});
     }
   }catch(e){
     S={...S,sc:'login',le:'Could not connect to the leaderboard. Please check your internet and try again.'};
@@ -554,7 +559,7 @@ window.doLogin=async()=>{
   render();
 };
 
-window.doLogout=()=>{S={...S,sc:'home',me:null,msg:'',mt:''};render()};
+window.doLogout=()=>{clearSession();S={...S,sc:'home',me:null,msg:'',mt:''};render()};
 window.doSubmit=async(force)=>{
   if(!force){S.sv=$('step-val')?.value||'';S.day=parseInt($('step-day')?.value||1)}
   const n=force?S.wv:parseInt(S.sv,10);
