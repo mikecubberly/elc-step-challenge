@@ -419,7 +419,7 @@ function loginHTML(){
     <div class="field">
       <label class="flabel">Password</label>
       <input type="password" id="lp" placeholder="Shared password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-      <div style="font-size:12px;color:var(--text-3);margin-top:5px;line-height:1.5">Forgot your password? Just use <strong>password</strong> &mdash; everyone shares the same one.</div>
+      <div style="font-size:12px;color:var(--text-3);margin-top:5px;line-height:1.5">The password was shown when you first created your account. Ask a colleague if you need a reminder.</div>
     </div>
     ${S.le?`<div class="msg-err">${esc(S.le)}</div>`:''}
     <button class="btn btn-p" onclick="doLogin()">Log In</button>
