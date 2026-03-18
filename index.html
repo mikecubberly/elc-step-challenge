@@ -221,11 +221,7 @@ async function fetchAll(){
 }
 
 async function apiCall(payload){
-  const res=await fetch(SHEET_URL,{
-    method:'POST',
-    headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify(payload)
-  });
+  const res=await fetch(SHEET_URL+'?payload='+encodeURIComponent(JSON.stringify(payload))+'&t='+Date.now());
   return res.json();
 }
 
