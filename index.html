@@ -328,7 +328,7 @@ function homeHTML(){
     ${netNote}
     <div class="card">
       <div class="card-title">Welcome, ELC Staff</div>
-      <div class="card-sub">First time here? Create your account below in seconds.<br>Returning? Log back in with your name and the shared password.</div>
+      <div class="card-sub">First time here? Create your account below in seconds.<br>Returning? Just log back in with your name.</div>
       <button class="btn btn-p" onclick="go('signup')">Create My Account</button>
       <button class="btn btn-o" onclick="go('login')">Log In</button>
     </div>
@@ -384,17 +384,13 @@ function successHTML(){
     <div class="card-title" style="margin-bottom:16px">How It Works</div>
     <div class="steps-list">
       <div class="step-row"><div class="step-n">1</div><div class="step-body"><strong>Bookmark this page</strong>Open this same link every day. Save it to your home screen for quick access.</div></div>
-      <div class="step-row"><div class="step-n">2</div><div class="step-body"><strong>Log In each day</strong>Enter your name and the password shown below.</div></div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-body"><strong>Log In each day</strong>Enter your name to log in and submit your steps.</div></div>
       <div class="step-row"><div class="step-n">3</div><div class="step-body"><strong>Select today&rsquo;s date</strong>Use the dropdown on the Log My Steps screen.</div></div>
       <div class="step-row"><div class="step-n">4</div><div class="step-body"><strong>Enter your step count</strong>Check your phone&rsquo;s Health app, Fitbit, or pedometer for today&rsquo;s total.</div></div>
       <div class="step-row"><div class="step-n">5</div><div class="step-body"><strong>Submit</strong>Your steps save instantly and the leaderboard updates right away.</div></div>
       <div class="step-row"><div class="step-n">6</div><div class="step-body"><strong>Missed a day?</strong>Simply select that date and submit whenever you remember.</div></div>
     </div>
-    <div class="pass-box">
-      <div class="pass-eyebrow">Write this down &mdash; you will need it every time you log in</div>
-      <div class="pass-word">password</div>
-      <div class="pass-note">Everyone in the challenge uses this same shared password.</div>
-    </div>
+
     <button class="btn btn-p" onclick="go('dashboard')">Submit Today&rsquo;s Steps</button>
   </div></div>`;
 }
